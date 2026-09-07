@@ -1,0 +1,12 @@
+name: GitHub Actions Demo
+
+on: [push]
+
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Le job a ete declenche par un evenement ${{ github.event_name }}"
+      - run: echo "Le job tourne sur ${{ runner.os }}"
+      - run: echo "La branche est ${{ github.ref }} et le repository est ${{ github.repository }}"

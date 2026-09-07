@@ -11,11 +11,24 @@ jobs:
       - name: Recuperer le repository
         uses: actions/checkout@v4
 
-      - name: Executer Python
+      - name: Verifier le secret
+        env:
+          SECRET_API_TOKEN: ${{ secrets.SECRET_API_TOKEN }}
+        run: |
+          if [ -n "$SECRET_API_TOKEN" ]; then
+            echo "Le secret est accessible"
+          else
+            echo "Le secret est absent"
+            exit 1
+          fi
+
+      - name: Executer le script Python
+        env:
+          SECRET_API_TOKEN: ${{ secrets.SECRET_API_TOKEN }}
         run: python3 job.py
 
       - name: Creer un fichier
-        run: echo "Bonjour depuis GitHub Actions" > resultat.txt
+        run: echo "Pipeline executee avec succes" > resultat.txt
 
       - name: Upload de l artefact
         uses: actions/upload-artifact@v4

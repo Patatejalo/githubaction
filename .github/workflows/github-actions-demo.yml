@@ -1,8 +1,7 @@
 name: GitHub Actions Demo
 
 on:
-  schedule:
-    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 jobs:
   Explore-GitHub-Actions:
@@ -14,3 +13,12 @@ jobs:
 
       - name: Executer Python
         run: python3 job.py
+
+      - name: Creer un fichier
+        run: echo "Bonjour depuis GitHub Actions" > resultat.txt
+
+      - name: Upload de l artefact
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultat-pipeline
+          path: resultat.txt
